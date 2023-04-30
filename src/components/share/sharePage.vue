@@ -83,8 +83,9 @@ const items: ShowData[] = [
 
         <!-- search -->
         <div class="flex pt-4 mx-4 mb-3">
-            <div class="bg-white w-5/6 rounded p-1 mr-2">
+            <div class="bg-white w-5/6 rounded p-1 mr-2 flex">
                 <MagnifyingGlassIcon class="h-6 w-6 text-gray-700" />
+                <input class="w-full mx-1" />
             </div>
             <div class="w-1/6 rounded border border-gray-500 ">
                 <AdjustmentsHorizontalIcon class="h-full w-6 text-white m-auto" />

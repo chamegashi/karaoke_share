@@ -6,7 +6,7 @@ import InputDataPage from './components/inputDataPage/inputDataPage.vue'
 
 <template>
   <div class="static">
-    <!-- <SharePage /> -->
+    <SharePage />
     <InputDataPage />
   </div>
 </template>

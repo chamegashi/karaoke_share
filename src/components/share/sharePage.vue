@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { AdjustmentsHorizontalIcon, MagnifyingGlassIcon, PlusIcon, XMarkIcon, CheckIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/solid'
+import {
+    AdjustmentsHorizontalIcon,
+    MagnifyingGlassIcon,
+    PlusIcon,
+    XMarkIcon,
+    CheckIcon,
+    ExclamationTriangleIcon
+} from '@heroicons/vue/24/solid'
 
 import { Music, ShowData } from '../../common/type'
 
@@ -84,6 +91,7 @@ const items: ShowData[] = [
             </div>
         </div>
 
+        <!-- todo -->
         <div class="relative mx-2 overflow-auto h-5/6">
             <table class="w-full">
                 <thead class="py-2">

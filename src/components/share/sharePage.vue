@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import {
     AdjustmentsHorizontalIcon,
     MagnifyingGlassIcon,
@@ -9,72 +10,32 @@ import {
 } from '@heroicons/vue/24/solid'
 
 import { Music, ShowData } from '../../common/type'
+import { getShareData, isLoading, responce, error } from '../../api/shareMusics'
 
 const header = ["曲", "MS", "GI", "Fu"]
+const sharedata = ref<ShowData[]>([]);
 
-const music: Music = {
-    "id": "1",
-    "title": "ANIMA",
-    "artist": "ReoNa",
-    "maxkey": "hiC",
-}
+watch(responce, () => {
+    if (!responce.value) {
+        return
+    }
+    let newShareData: ShowData[] = []
+    responce.value.forEach(element => {
+        newShareData.push({
+            id: element.id,
+            title: element.title,
+            hiragana: element.hiragana,
+            artist: element.artist,
+            max_key: element.max_key,
+            massann: element.is_available_msy,
+            gil: element.is_available_gil,
+            fulu: element.is_available_fulu
+        })
+    });
+    sharedata.value = newShareData
+})
 
-const items: ShowData[] = [
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-    {
-        "music": music,
-        "massann": 0,
-        "gil": 1,
-        "fulu": 2,
-    },
-]
+getShareData()
 
 </script>
 
@@ -104,12 +65,12 @@ const items: ShowData[] = [
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in items" :key="item.music.id" class="text-gray-200 border-b-2 border-gray-400">
+                    <tr v-for="item in sharedata" :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
                         <td class="py-2">
-                            <p class="pl-1">{{ music.title }}</p>
+                            <p class="pl-1">{{ item.title }}</p>
                             <div class="flex">
-                                <p class="pl-1 w-4/6 text-xs text-gray-400">{{ music.artist }}</p>
-                                <p class="pl-1 w-2/6 text-xs text-gray-400">maxkey: {{ music.maxkey }}</p>
+                                <p class="pl-1 w-4/6 text-xs text-gray-400">{{ item.artist }}</p>
+                                <p class="pl-1 w-2/6 text-xs text-gray-400">maxkey: {{ item.max_key }}</p>
                             </div>
                         </td>
                         <td class="text-center bg-gray-600">

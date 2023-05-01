@@ -7,7 +7,11 @@ export type RangeType = 'notSelected' | 'mid2' | 'hi' | 'hihi'
 export type PianoType = 'A' | 'A#' | 'B' | 'C' | 'C#' | 'D' | 'D#' | 'E' | 'F' | 'F#' | 'G' | 'G#'
 
 export type ShowData = {
-    music: Music,
+    id: string,
+    title: string,
+    hiragana: string,
+    artist: string,
+    max_key: string,
     massann: SongAvaliable
     gil: SongAvaliable
     fulu: SongAvaliable
@@ -18,4 +22,15 @@ export type Music = {
     title: string,
     artist: string,
     maxkey: string,
+}
+
+export type ShareMusicResponce = {
+    id: string,
+    title: string,
+    hiragana: string,
+    artist: string,
+    max_key: string,
+    is_available_msy: SongAvaliable,
+    is_available_gil: SongAvaliable,
+    is_available_fulu: SongAvaliable,
 }

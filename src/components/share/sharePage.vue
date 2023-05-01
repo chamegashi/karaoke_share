@@ -9,16 +9,24 @@ import {
     ExclamationTriangleIcon
 } from '@heroicons/vue/24/solid'
 
-import { Music, ShowData } from '../../common/type'
-import { getShareData, isLoading, responce, error } from '../../api/shareMusics'
+import { ShowData } from '../../common/type'
+import { getShareData, isLoading, responce } from '../../api/shareMusics'
+import { useShareMusics } from '../../stores/music'
 
 const header = ["曲", "MS", "GI", "Fu"]
 const sharedata = ref<ShowData[]>([]);
+const storeShareMusics = useShareMusics()
 
 watch(responce, () => {
     if (!responce.value) {
         return
     }
+
+    if (storeShareMusics.musics.length > 0) {
+        sharedata.value = storeShareMusics.musics
+        return
+    }
+
     let newShareData: ShowData[] = []
     responce.value.forEach(element => {
         newShareData.push({
@@ -33,6 +41,7 @@ watch(responce, () => {
         })
     });
     sharedata.value = newShareData
+    storeShareMusics.updateMusic(newShareData)
 })
 
 getShareData()
@@ -53,8 +62,11 @@ getShareData()
             </div>
         </div>
 
+        <div v-if="isLoading">
+        </div>
+
         <!-- todo -->
-        <div class="relative mx-2 overflow-auto h-5/6">
+        <div v-if="sharedata.length > 0" class="relative mx-2 overflow-auto h-5/6">
             <table class="w-full">
                 <thead class="py-2">
                     <tr class="text-gray-200">

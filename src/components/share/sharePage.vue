@@ -4,14 +4,12 @@ import {
     AdjustmentsHorizontalIcon,
     MagnifyingGlassIcon,
     PlusIcon,
-    XMarkIcon,
-    CheckIcon,
-    ExclamationTriangleIcon
 } from '@heroicons/vue/24/solid'
 
 import { ShowData } from '../../common/type'
 import { getShareData, isLoading, responce } from '../../api/shareMusics'
 import { useShareMusics } from '../../stores/music'
+import availableDropDown from './isAvailableDropdown.vue'
 
 const header = ["曲", "MS", "GI", "Fu"]
 const sharedata = ref<ShowData[]>([]);
@@ -62,10 +60,18 @@ getShareData()
             </div>
         </div>
 
-        <div v-if="isLoading">
+
+
+        <!-- loading -->
+        <div v-if="isLoading" class="my-8">
+            <div className="flex justify-center">
+                <div className="animate-ping h-2 w-2 bg-white rounded-full"></div>
+                <div className="animate-ping h-2 w-2 bg-white rounded-full mx-4"></div>
+                <div className="animate-ping h-2 w-2 bg-white rounded-full"></div>
+            </div>
         </div>
 
-        <!-- todo -->
+        <!-- table -->
         <div v-if="sharedata.length > 0" class="relative mx-2 overflow-auto h-5/6">
             <table class="w-full">
                 <thead class="py-2">
@@ -86,19 +92,13 @@ getShareData()
                             </div>
                         </td>
                         <td class="text-center bg-gray-600">
-                            <CheckIcon v-if="item.massann === 2" class="h-6 w-6 text-green-300 m-auto" />
-                            <ExclamationTriangleIcon v-if="item.massann === 1" class="h-6 w-6 text-yellow-300 m-auto" />
-                            <XMarkIcon v-if="item.massann === 0" class="h-6 w-6 text-red-300 m-auto" />
+                            <availableDropDown :available-num="item.massann" @update="(update) => item.massann = update" />
                         </td>
                         <td class="text-center">
-                            <CheckIcon v-if="item.gil === 2" class="h-6 w-6 text-green-300 m-auto" />
-                            <ExclamationTriangleIcon v-if="item.gil === 1" class="h-6 w-6 text-yellow-300 m-auto" />
-                            <XMarkIcon v-if="item.gil === 0" class="h-6 w-6 text-red-300 m-auto" />
+                            <availableDropDown :available-num="item.gil" @update="(update) => item.gil = update" />
                         </td>
                         <td class="text-center bg-gray-600">
-                            <CheckIcon v-if="item.fulu === 2" class="h-6 w-6 text-green-300 m-auto" />
-                            <ExclamationTriangleIcon v-if="item.fulu === 1" class="h-6 w-6 text-yellow-300 m-auto" />
-                            <XMarkIcon v-if="item.fulu === 0" class="h-6 w-6 text-red-300 m-auto" />
+                            <availableDropDown :available-num="item.fulu" @update="(update) => item.fulu = update" />
                         </td>
                     </tr>
                 </tbody>

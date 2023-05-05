@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import {
-    AdjustmentsHorizontalIcon,
     MagnifyingGlassIcon,
     PlusIcon,
 } from '@heroicons/vue/24/solid'
@@ -10,6 +9,7 @@ import { ShowData } from '../../common/type'
 import { getShareData, isLoading, responce } from '../../api/shareMusics'
 import { useShareMusics } from '../../stores/music'
 import availableDropDown from './isAvailableDropdown.vue'
+import FilterPopover from './filterPopover.vue'
 
 const header = ["曲", "MS", "GI", "Fu"]
 const sharedata = ref<ShowData[]>([]);
@@ -55,8 +55,8 @@ getShareData()
                 <MagnifyingGlassIcon class="h-6 w-6 text-gray-700" />
                 <input class="w-full mx-1" />
             </div>
-            <div class="w-1/6 rounded border border-gray-500 ">
-                <AdjustmentsHorizontalIcon class="h-full w-6 text-white m-auto" />
+            <div class="w-1/6">
+                <FilterPopover />
             </div>
         </div>
 

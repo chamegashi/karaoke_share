@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
-import { ShowData } from '../common/type'
+import { Music } from '../common/type'
 
 export const useShareMusics = defineStore('musics', {
   state: () => ({
-    musics: [] as ShowData[],
+    musics: [] as Music[],
   }),
   actions: {
-    updateMusic(data: ShowData[]) {
+    updateMusic(data: Music[]) {
       this.musics = data
     }
   }

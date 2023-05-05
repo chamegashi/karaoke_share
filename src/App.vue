@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SharePage from './components/share/sharePage.vue'
-import InputDataPage from './components/inputDataPage/inputDataPage.vue'
+import InputDataPage from './components/inputData/inputDataPage.vue'
 
 </script>
 

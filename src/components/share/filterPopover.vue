@@ -24,13 +24,13 @@ import {
                             <div class="text-white m-auto">
                                 MS
                             </div>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <CheckIcon class="h-6 w-6 text-green-300 m-auto" />
                             </button>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <ExclamationTriangleIcon class="h-6 w-6 text-yellow-300 m-auto" />
                             </button>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <XMarkIcon class="h-6 w-6 text-red-300 m-auto" />
                             </button>
                         </div>
@@ -38,13 +38,13 @@ import {
                             <div class="text-white m-auto">
                                 Gi
                             </div>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <CheckIcon class="h-6 w-6 text-green-300 m-auto" />
                             </button>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <ExclamationTriangleIcon class="h-6 w-6 text-yellow-300 m-auto" />
                             </button>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <XMarkIcon class="h-6 w-6 text-red-300 m-auto" />
                             </button>
                         </div>
@@ -52,13 +52,13 @@ import {
                             <div class="text-white m-auto">
                                 Fu
                             </div>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <CheckIcon class="h-6 w-6 text-green-300 m-auto" />
                             </button>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <ExclamationTriangleIcon class="h-6 w-6 text-yellow-300 m-auto" />
                             </button>
-                            <button class="border rounded p-1">
+                            <button class="border border-gray-400 rounded p-1">
                                 <XMarkIcon class="h-6 w-6 text-red-300 m-auto" />
                             </button>
                         </div>

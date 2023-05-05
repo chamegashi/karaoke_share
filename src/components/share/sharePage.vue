@@ -5,14 +5,18 @@ import {
     PlusIcon,
 } from '@heroicons/vue/24/solid'
 
-import { ShowData } from '../../common/type'
-import { getShareData, isLoading, responce } from '../../api/shareMusics'
-import { useShareMusics } from '../../stores/music'
+import { Music } from '../../common/type'
 import availableDropDown from './isAvailableDropdown.vue'
 import FilterPopover from './filterPopover.vue'
 
+import { getShareData, isLoading, responce } from '../../api/shareMusics'
+import { useShareMusics } from '../../stores/music'
+import { filterMusicByWord } from '../../composable/filterMusic'
+
 const header = ["曲", "MS", "GI", "Fu"]
-const sharedata = ref<ShowData[]>([]);
+const musicdata = ref<Music[]>([]);
+const showdata = ref<Music[]>([]);
+const filterWord = ref<string>("");
 const storeShareMusics = useShareMusics()
 
 watch(responce, () => {
@@ -21,11 +25,12 @@ watch(responce, () => {
     }
 
     if (storeShareMusics.musics.length > 0) {
-        sharedata.value = storeShareMusics.musics
+        musicdata.value = storeShareMusics.musics
+        showdata.value = storeShareMusics.musics
         return
     }
 
-    let newShareData: ShowData[] = []
+    let newShareData: Music[] = []
     responce.value.forEach(element => {
         newShareData.push({
             id: element.id,
@@ -38,8 +43,13 @@ watch(responce, () => {
             fulu: element.is_available_fulu
         })
     });
-    sharedata.value = newShareData
+    musicdata.value = newShareData
+    showdata.value = newShareData
     storeShareMusics.updateMusic(newShareData)
+})
+
+watch(filterWord, () => {
+    showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
 })
 
 getShareData()
@@ -53,13 +63,12 @@ getShareData()
         <div class="flex pt-4 mx-4 mb-3">
             <div class="bg-white w-5/6 rounded p-1 mr-2 flex">
                 <MagnifyingGlassIcon class="h-6 w-6 text-gray-700" />
-                <input class="w-full mx-1" />
+                <input class="w-full mx-1" v-model="filterWord" />
             </div>
             <div class="w-1/6">
                 <FilterPopover />
             </div>
         </div>
-
 
 
         <!-- loading -->
@@ -72,7 +81,7 @@ getShareData()
         </div>
 
         <!-- table -->
-        <div v-if="sharedata.length > 0" class="relative mx-2 overflow-auto h-5/6">
+        <div v-else class="relative mx-2 overflow-auto h-5/6">
             <table class="w-full">
                 <thead class="py-2">
                     <tr class="text-gray-200">
@@ -83,7 +92,7 @@ getShareData()
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in sharedata" :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
+                    <tr v-for="item in showdata" :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
                         <td class="py-2">
                             <p class="pl-1">{{ item.title }}</p>
                             <div class="flex">
@@ -103,7 +112,11 @@ getShareData()
                     </tr>
                 </tbody>
             </table>
+            <div v-if="showdata.length <= 0">
+                <p class="text-white text-3xl text-center mt-4">ないです。</p>
+            </div>
         </div>
+
 
         <!-- button -->
         <button class="absolute bottom-4 left-2/4 -translate-x-2/4 p-2 rounded-full bg-blue-500">

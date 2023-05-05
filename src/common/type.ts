@@ -6,7 +6,7 @@ export type SongAvaliable = 0 | 1 | 2
 export type RangeType = 'notSelected' | 'mid2' | 'hi' | 'hihi'
 export type PianoType = 'A' | 'A#' | 'B' | 'C' | 'C#' | 'D' | 'D#' | 'E' | 'F' | 'F#' | 'G' | 'G#'
 
-export type ShowData = {
+export type Music = {
     id: string,
     title: string,
     hiragana: string,
@@ -15,13 +15,6 @@ export type ShowData = {
     massann: SongAvaliable
     gil: SongAvaliable
     fulu: SongAvaliable
-}
-
-export type Music = {
-    id: string,
-    title: string,
-    artist: string,
-    maxkey: string,
 }
 
 export type ShareMusicResponce = {

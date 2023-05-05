@@ -9,6 +9,7 @@ import {
 import { SongAvaliable, Users } from '../../common/type'
 
 defineProps<{ user: Users }>()
+const emit = defineEmits(['update']);
 
 const filterValues = ref<SongAvaliable[]>([])
 
@@ -20,6 +21,7 @@ const toggleValue = (input: SongAvaliable) => {
     } else {
         filterValues.value.push(input)
     }
+    emit('update', filterValues.value)
 }
 
 </script>

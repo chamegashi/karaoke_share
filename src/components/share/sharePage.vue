@@ -5,7 +5,7 @@ import {
     PlusIcon,
 } from '@heroicons/vue/24/solid'
 
-import { Music } from '../../common/type'
+import { Music, SongAvailable } from '../../common/type'
 import availableDropDown from './isAvailableDropdown.vue'
 import FilterPopover from './filterPopover.vue'
 
@@ -18,6 +18,9 @@ const musicdata = ref<Music[]>([]);
 const showdata = ref<Music[]>([]);
 const filterWord = ref<string>("");
 const storeShareMusics = useShareMusics()
+const msyValue = ref<SongAvailable[]>([])
+const gilValue = ref<SongAvailable[]>([])
+const fuluValue = ref<SongAvailable[]>([])
 
 watch(responce, () => {
     if (!responce.value) {
@@ -51,6 +54,10 @@ watch(responce, () => {
 watch(filterWord, () => {
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
 })
+
+// watch(filterWord, () => {
+//     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
+// })
 
 getShareData()
 

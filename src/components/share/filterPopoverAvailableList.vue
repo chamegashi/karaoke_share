@@ -6,14 +6,14 @@ import {
     ExclamationTriangleIcon,
 } from '@heroicons/vue/24/solid'
 
-import { SongAvaliable, Users } from '../../common/type'
+import { SongAvailable, Users } from '../../common/type'
 
 defineProps<{ user: Users }>()
 const emit = defineEmits(['update']);
 
-const filterValues = ref<SongAvaliable[]>([])
+const filterValues = ref<SongAvailable[]>([])
 
-const toggleValue = (input: SongAvaliable) => {
+const toggleValue = (input: SongAvailable) => {
     if (filterValues.value.includes(input)) {
         filterValues.value = filterValues.value.filter((value) => {
             return value !== input

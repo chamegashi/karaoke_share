@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { SongAvaliable } from '../../common/type'
+import { SongAvailable } from '../../common/type'
 import {
     XMarkIcon,
     CheckIcon,
     ExclamationTriangleIcon
 } from '@heroicons/vue/24/solid'
 
-defineProps<{ availableNum: SongAvaliable }>()
+defineProps<{ availableNum: SongAvailable }>()
 
 </script>
 

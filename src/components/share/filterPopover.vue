@@ -5,12 +5,12 @@ import {
     AdjustmentsHorizontalIcon
 } from '@heroicons/vue/24/solid'
 
-import { SongAvaliable } from '../../common/type'
+import { SongAvailable } from '../../common/type'
 import filterPopoverAvailableList from './filterPopoverAvailableList.vue'
 
-const msyValue = ref<SongAvaliable[]>([])
-const gilValue = ref<SongAvaliable[]>([])
-const fuluValue = ref<SongAvaliable[]>([])
+const msyValue = ref<SongAvailable[]>([])
+const gilValue = ref<SongAvailable[]>([])
+const fuluValue = ref<SongAvailable[]>([])
 
 </script>
 

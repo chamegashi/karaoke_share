@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { PianoType, RangeType, SongAvaliable, Users } from '../../common/type'
+import { PianoType, RangeType, SongAvailable, Users } from '../../common/type'
 import {
     XMarkIcon,
     CheckIcon,
@@ -10,9 +10,9 @@ import {
 
 const rangeValue = ref<RangeType>('hi');
 const pianoValue = ref<PianoType>('A');
-const msyValue = ref<SongAvaliable>(0);
-const gilValue = ref<SongAvaliable>(0);
-const fuluValue = ref<SongAvaliable>(0);
+const msyValue = ref<SongAvailable>(0);
+const gilValue = ref<SongAvailable>(0);
+const fuluValue = ref<SongAvailable>(0);
 
 const toggleRange = (value: RangeType) => {
     rangeValue.value = value
@@ -22,7 +22,7 @@ const changePiano = (value: PianoType) => {
     pianoValue.value = value
 }
 
-const toggleAvaliable = (value: SongAvaliable, name: Users) => {
+const toggleAvailable = (value: SongAvailable, name: Users) => {
     if (name === 'MSY') {
         msyValue.value = value
     } else if (name === 'GIL') {
@@ -127,19 +127,19 @@ const toggleAvaliable = (value: SongAvaliable, name: Users) => {
                 <div class="w-3/6 m-auto pl-3">MSY</div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': msyValue === 2 }"
-                        @click="toggleAvaliable(2, 'MSY')">
+                        @click="toggleAvailable(2, 'MSY')">
                         <CheckIcon class="h-6 w-6 text-green-300" />
                     </button>
                 </div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': msyValue === 1 }"
-                        @click="toggleAvaliable(1, 'MSY')">
+                        @click="toggleAvailable(1, 'MSY')">
                         <ExclamationTriangleIcon class="h-6 w-6 text-yellow-300" />
                     </button>
                 </div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': msyValue === 0 }"
-                        @click="toggleAvaliable(0, 'MSY')">
+                        @click="toggleAvailable(0, 'MSY')">
                         <XMarkIcon class="h-6 w-6 text-red-300" />
                     </button>
                 </div>
@@ -148,19 +148,19 @@ const toggleAvaliable = (value: SongAvaliable, name: Users) => {
                 <div class="w-3/6 m-auto pl-3">GIL</div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': gilValue === 2 }"
-                        @click="toggleAvaliable(2, 'GIL')">
+                        @click="toggleAvailable(2, 'GIL')">
                         <CheckIcon class="h-6 w-6 text-green-300" />
                     </button>
                 </div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': gilValue === 1 }"
-                        @click="toggleAvaliable(1, 'GIL')">
+                        @click="toggleAvailable(1, 'GIL')">
                         <ExclamationTriangleIcon class="h-6 w-6 text-yellow-300" />
                     </button>
                 </div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': gilValue === 0 }"
-                        @click="toggleAvaliable(0, 'GIL')">
+                        @click="toggleAvailable(0, 'GIL')">
                         <XMarkIcon class="h-6 w-6 text-red-300" />
                     </button>
                 </div>
@@ -169,19 +169,19 @@ const toggleAvaliable = (value: SongAvaliable, name: Users) => {
                 <div class="w-3/6 m-auto pl-3">Fulu</div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': fuluValue === 2 }"
-                        @click="toggleAvaliable(2, 'Fulu')">
+                        @click="toggleAvailable(2, 'Fulu')">
                         <CheckIcon class="h-6 w-6 text-green-300" />
                     </button>
                 </div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': fuluValue === 1 }"
-                        @click="toggleAvaliable(1, 'Fulu')">
+                        @click="toggleAvailable(1, 'Fulu')">
                         <ExclamationTriangleIcon class="h-6 w-6 text-yellow-300" />
                     </button>
                 </div>
                 <div class="w-1/6">
                     <button class="border rounded border-gray-400 p-2" :class="{ 'bg-gray-500': fuluValue === 0 }"
-                        @click="toggleAvaliable(0, 'Fulu')">
+                        @click="toggleAvailable(0, 'Fulu')">
                         <XMarkIcon class="h-6 w-6 text-red-300" />
                     </button>
                 </div>

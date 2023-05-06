@@ -11,7 +11,7 @@ import FilterPopover from './filterPopover.vue'
 
 import { getShareData, isLoading, responce } from '../../api/shareMusics'
 import { useShareMusics } from '../../stores/stores'
-import { filterMusicByWord } from '../../composable/filterMusic'
+import { filterMusicByWord, filterMusicByIsAvailable } from '../../composable/filterMusic'
 
 const header = ["曲", "MS", "GI", "Fu"]
 const musicdata = ref<Music[]>([]);
@@ -55,7 +55,14 @@ watch(responce, () => {
 
 watch(filterWord, () => {
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
+    showdata.value = filterMusicByIsAvailable(showdata.value, filterAvailableArray.value)
 })
+
+const updateFilterAvailable = (data: SongAvailableArray) => {
+    filterAvailableArray.value = data
+    showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
+    showdata.value = filterMusicByIsAvailable(showdata.value, filterAvailableArray.value)
+}
 
 getShareData()
 
@@ -71,10 +78,9 @@ getShareData()
                 <input class="w-full mx-1" v-model="filterWord" />
             </div>
             <div class="w-1/6">
-                <FilterPopover @update="(data) => filterAvailableArray = data" />
+                <FilterPopover @update="(data) => updateFilterAvailable(data)" />
             </div>
         </div>
-
 
         <!-- loading -->
         <div v-if="isLoading" class="my-8">

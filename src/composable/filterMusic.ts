@@ -7,9 +7,26 @@ export const filterMusicByWord = (data: Music[], filterWord: string): Music[] =>
 }
 
 export const filterMusicByIsAvailable = (data: Music[], filterAvailableArray: SongAvailableArray) => {
-    return data.filter((music) => {
-        return filterAvailableArray.msyAvailable.includes(music.massann)
-            || filterAvailableArray.gilAvailable.includes(music.gil)
-            || filterAvailableArray.fuluAvailable.includes(music.fulu)
-    })
+    let filterdMusics = data
+    if (filterAvailableArray.msyAvailable.length > 0) {
+        filterdMusics = data.filter((music) => {
+            return filterAvailableArray.msyAvailable.includes(music.massann)
+        })
+    }
+
+    if (filterAvailableArray.gilAvailable.length > 0) {
+        filterdMusics = filterdMusics.filter((music) => {
+            return filterAvailableArray.gilAvailable.includes(music.gil)
+        })
+    }
+
+    if (filterAvailableArray.fuluAvailable.length > 0) {
+        filterdMusics = filterdMusics.filter((music) => {
+            return filterAvailableArray.fuluAvailable.includes(music.fulu)
+        })
+    }
+
+    console.log(filterdMusics)
+
+    return filterdMusics
 }

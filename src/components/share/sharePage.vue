@@ -7,7 +7,7 @@ import {
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-import { Music, SongAvailable, SongAvailableArray, Users } from '../../common/type'
+import { Music, SongAvailableArray } from '../../common/type'
 import availableDropDown from './isAvailableDropdown.vue'
 import FilterPopover from './filterPopover.vue'
 
@@ -82,7 +82,7 @@ getShareData()
 </script>
 
 <template>
-    <div class="relative bg-gray-700 main-view">
+    <div class="relative bg-gray-700 overflow-x-hidden main-view">
 
         <!-- search -->
         <div class="flex pt-4 mx-4 mb-3">
@@ -146,7 +146,8 @@ getShareData()
 
 
         <!-- button -->
-        <button class="absolute bottom-4 left-2/4 -translate-x-2/4 p-2 rounded-full bg-blue-500">
+        <button class="absolute bottom-4 left-2/4 -translate-x-2/4 p-2 rounded-full bg-blue-500"
+            @click="$router.push('/edit')">
             <PlusIcon class="w-8 h-8 text-white" />
         </button>
 

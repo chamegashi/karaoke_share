@@ -26,7 +26,5 @@ export const filterMusicByIsAvailable = (data: Music[], filterAvailableArray: So
         })
     }
 
-    console.log(filterdMusics)
-
     return filterdMusics
 }

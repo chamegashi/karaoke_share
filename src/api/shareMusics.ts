@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ShareMusicResponce } from '../common/type';
 import { ref } from 'vue';
 
-const VITE_API_URL = import.meta.env.VITE_API_URL
+const VITE_API_URL = process.env.VITE_API_URL
 
 export const responce = ref<ShareMusicResponce[] | null>()
 export const error = ref("")

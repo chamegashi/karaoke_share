@@ -4,8 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 import './style.css'
 
-import SharePage from './components/share/sharePage.vue'
-import InputDataPage from './components/inputData/inputDataPage.vue'
+import SharePage from './pages/sharePage.vue'
+import InputDataPage from './pages/inputDataPage.vue'
 
 const pinia = createPinia()
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { PianoType, RangeType, SongAvailable, Users } from '../../common/type'
+import { PianoType, RangeType, SongAvailable, Users } from '../common/type'
 import {
     XMarkIcon,
     CheckIcon,
@@ -37,7 +37,7 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
 <template>
     <div class="relative bg-gray-700 h-screen">
         <div class="pt-2 mb-3 mx-3">
-            <button class="border rounded py-2 px-4">
+            <button class="border rounded py-2 px-4" @click="$router.push('/')">
                 <ArrowUturnLeftIcon class="h-6 w-6 text-white" />
             </button>
         </div>

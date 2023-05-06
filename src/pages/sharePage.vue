@@ -7,13 +7,13 @@ import {
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-import { Music, SongAvailableArray } from '../../common/type'
-import availableDropDown from './isAvailableDropdown.vue'
-import FilterPopover from './filterPopover.vue'
+import { Music, SongAvailableArray } from '../common/type'
+import availableDropDown from '../components/share/isAvailableDropdown.vue'
+import FilterPopover from '../components/share/filterPopover.vue'
 
-import { getShareData, isLoading, responce } from '../../api/shareMusics'
-import { useShareMusics } from '../../stores/stores'
-import { filterMusicByWord, filterMusicByIsAvailable } from '../../composable/filterMusic'
+import { getShareData, isLoading, responce } from '../api/shareMusics'
+import { useShareMusics } from '../stores/stores'
+import { filterMusicByWord, filterMusicByIsAvailable } from '../composable/filterMusic'
 
 const $toast = useToast();
 

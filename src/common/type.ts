@@ -29,7 +29,7 @@ export type ShareMusicResponce = {
 }
 
 export type SongAvailableArray = {
-    msyAvailable: SongAvailable,
-    gilAvailable: SongAvailable,
-    fuluAvailable: SongAvailable,
+    msyAvailable: SongAvailable[],
+    gilAvailable: SongAvailable[],
+    fuluAvailable: SongAvailable[],
 }

@@ -8,8 +8,8 @@ export const filterMusicByWord = (data: Music[], filterWord: string): Music[] =>
 
 export const filterMusicByIsAvailable = (data: Music[], filterAvailableArray: SongAvailableArray) => {
     return data.filter((music) => {
-        return music.massann === filterAvailableArray.msyAvailable
-            || music.gil === filterAvailableArray.gilAvailable
-            || music.fulu === filterAvailableArray.fuluAvailable
+        return filterAvailableArray.msyAvailable.includes(music.massann)
+            || filterAvailableArray.gilAvailable.includes(music.gil)
+            || filterAvailableArray.fuluAvailable.includes(music.fulu)
     })
 }

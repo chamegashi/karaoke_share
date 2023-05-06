@@ -8,10 +8,11 @@ import {
 
 import { SongAvailable, Users } from '../../common/type'
 
-defineProps<{ user: Users }>()
+const props = defineProps<{ user: Users, availableValue: SongAvailable[] }>()
 const emit = defineEmits(['update']);
 
 const filterValues = ref<SongAvailable[]>([])
+filterValues.value = props.availableValue;
 
 const toggleValue = (input: SongAvailable) => {
     if (filterValues.value.includes(input)) {

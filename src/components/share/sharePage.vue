@@ -5,22 +5,24 @@ import {
     PlusIcon,
 } from '@heroicons/vue/24/solid'
 
-import { Music, SongAvailable } from '../../common/type'
+import { Music, SongAvailableArray } from '../../common/type'
 import availableDropDown from './isAvailableDropdown.vue'
 import FilterPopover from './filterPopover.vue'
 
 import { getShareData, isLoading, responce } from '../../api/shareMusics'
-import { useShareMusics } from '../../stores/music'
+import { useShareMusics } from '../../stores/stores'
 import { filterMusicByWord } from '../../composable/filterMusic'
 
 const header = ["曲", "MS", "GI", "Fu"]
 const musicdata = ref<Music[]>([]);
 const showdata = ref<Music[]>([]);
 const filterWord = ref<string>("");
+const filterAvailableArray = ref<SongAvailableArray>({
+    msyAvailable: [],
+    gilAvailable: [],
+    fuluAvailable: [],
+});
 const storeShareMusics = useShareMusics()
-const msyValue = ref<SongAvailable[]>([])
-const gilValue = ref<SongAvailable[]>([])
-const fuluValue = ref<SongAvailable[]>([])
 
 watch(responce, () => {
     if (!responce.value) {
@@ -55,10 +57,6 @@ watch(filterWord, () => {
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
 })
 
-// watch(filterWord, () => {
-//     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
-// })
-
 getShareData()
 
 </script>
@@ -73,7 +71,7 @@ getShareData()
                 <input class="w-full mx-1" v-model="filterWord" />
             </div>
             <div class="w-1/6">
-                <FilterPopover />
+                <FilterPopover @update="(data) => filterAvailableArray = data" />
             </div>
         </div>
 

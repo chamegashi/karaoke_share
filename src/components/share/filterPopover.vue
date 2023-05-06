@@ -1,16 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 import {
     AdjustmentsHorizontalIcon
 } from '@heroicons/vue/24/solid'
 
-import { SongAvailable } from '../../common/type'
+import { SongAvailableArray } from '../../common/type'
 import filterPopoverAvailableList from './filterPopoverAvailableList.vue'
 
-const msyValue = ref<SongAvailable[]>([])
-const gilValue = ref<SongAvailable[]>([])
-const fuluValue = ref<SongAvailable[]>([])
+const emit = defineEmits(['update']);
+
+const filterAvailableArray = ref<SongAvailableArray>({
+    msyAvailable: [],
+    gilAvailable: [],
+    fuluAvailable: [],
+});
+
+watch(filterAvailableArray.value, () => {
+    emit('update', filterAvailableArray.value)
+})
 
 </script>
 
@@ -26,9 +34,12 @@ const fuluValue = ref<SongAvailable[]>([])
                 class="absolute left-1/2 z-10 mt-3 w-60 max-w-sm -translate-x-3/4 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div class="overflow-hidden rounded-lg shadow-2xl ring-1 ring-black ring-opacity-5">
                     <div class="relative grid gap-8 p-5 lg:grid-cols-2 bg-gray-700">
-                        <filterPopoverAvailableList user="MSY" @update="(value) => msyValue = value" />
-                        <filterPopoverAvailableList user="GIL" @update="(value) => gilValue = value" />
-                        <filterPopoverAvailableList user="Fulu" @update="(value) => fuluValue = value" />
+                        <filterPopoverAvailableList user="MSY" :available-value="filterAvailableArray.msyAvailable"
+                            @update="(value) => filterAvailableArray.msyAvailable = value" />
+                        <filterPopoverAvailableList user="GIL" :available-value="filterAvailableArray.gilAvailable"
+                            @update="(value) => filterAvailableArray.gilAvailable = value" />
+                        <filterPopoverAvailableList user="Fulu" :available-value="filterAvailableArray.fuluAvailable"
+                            @update="(value) => filterAvailableArray.fuluAvailable = value" />
                     </div>
                 </div>
             </PopoverPanel>

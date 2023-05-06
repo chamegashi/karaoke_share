@@ -5,7 +5,7 @@ import InputDataPage from './components/inputData/inputDataPage.vue'
 </script>
 
 <template>
-  <div class="static">
+  <div class="static overflow-x-hidden">
     <SharePage />
     <InputDataPage />
   </div>

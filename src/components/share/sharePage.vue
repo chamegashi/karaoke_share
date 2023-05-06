@@ -4,14 +4,18 @@ import {
     MagnifyingGlassIcon,
     PlusIcon,
 } from '@heroicons/vue/24/solid'
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
-import { Music, SongAvailableArray } from '../../common/type'
+import { Music, SongAvailable, SongAvailableArray, Users } from '../../common/type'
 import availableDropDown from './isAvailableDropdown.vue'
 import FilterPopover from './filterPopover.vue'
 
 import { getShareData, isLoading, responce } from '../../api/shareMusics'
 import { useShareMusics } from '../../stores/stores'
 import { filterMusicByWord, filterMusicByIsAvailable } from '../../composable/filterMusic'
+
+const $toast = useToast();
 
 const header = ["曲", "MS", "GI", "Fu"]
 const musicdata = ref<Music[]>([]);
@@ -64,6 +68,15 @@ const updateFilterAvailable = (data: SongAvailableArray) => {
     showdata.value = filterMusicByIsAvailable(showdata.value, filterAvailableArray.value)
 }
 
+const updateAvailable = (item: Music) => {
+    console.log(item)
+    $toast.open({
+        message: 'こうしん！',
+        type: 'success',
+        position: 'bottom-left'
+    })
+}
+
 getShareData()
 
 </script>
@@ -112,13 +125,16 @@ getShareData()
                             </div>
                         </td>
                         <td class="text-center bg-gray-600">
-                            <availableDropDown :available-num="item.massann" @update="(update) => item.massann = update" />
+                            <availableDropDown :available-num="item.massann"
+                                @update="(update) => { item.massann = update; updateAvailable(item) }" />
                         </td>
                         <td class="text-center">
-                            <availableDropDown :available-num="item.gil" @update="(update) => item.gil = update" />
+                            <availableDropDown :available-num="item.gil"
+                                @update="(update) => { item.gil = update; updateAvailable(item) }" />
                         </td>
                         <td class="text-center bg-gray-600">
-                            <availableDropDown :available-num="item.fulu" @update="(update) => item.fulu = update" />
+                            <availableDropDown :available-num="item.fulu"
+                                @update="(update) => { item.fulu = update; updateAvailable(item) }" />
                         </td>
                     </tr>
                 </tbody>

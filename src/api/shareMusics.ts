@@ -21,3 +21,7 @@ export const getShareData = () => {
             isLoading.value = false
         })
 }
+
+export const updateAvailable = () => {
+
+}

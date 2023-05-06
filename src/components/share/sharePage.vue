@@ -69,7 +69,7 @@ getShareData()
 </script>
 
 <template>
-    <div class="relative bg-gray-700 h-screen">
+    <div class="relative bg-gray-700 main-view">
 
         <!-- search -->
         <div class="flex pt-4 mx-4 mb-3">
@@ -136,3 +136,9 @@ getShareData()
 
     </div>
 </template>
+
+<style>
+.main-view {
+    height: 100svh
+}
+</style>

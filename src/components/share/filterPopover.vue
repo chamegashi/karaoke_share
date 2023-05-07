@@ -5,20 +5,23 @@ import {
     AdjustmentsHorizontalIcon
 } from '@heroicons/vue/24/solid'
 
-import { SongAvailableArray } from '../../common/type'
+import { FilterArray } from '../../common/type'
 import filterPopoverAvailableList from './filterPopoverAvailableList.vue'
 import filterPopoverRange from './filterPopoverRange.vue'
 
 const emit = defineEmits(['update']);
 
-const filterAvailableArray = ref<SongAvailableArray>({
-    msyAvailable: [],
-    gilAvailable: [],
-    fuluAvailable: [],
-});
+const filterArray = ref<FilterArray>({
+    songAvailableArray: {
+        msyAvailable: [],
+        gilAvailable: [],
+        fuluAvailable: [],
+    },
+    songRangeArray: []
+})
 
-watch(filterAvailableArray.value, () => {
-    emit('update', filterAvailableArray.value)
+watch(filterArray.value, () => {
+    emit('update', filterArray.value)
 })
 
 </script>
@@ -35,15 +38,19 @@ watch(filterAvailableArray.value, () => {
                 class="absolute left-1/2 z-10 mt-3 w-60 max-w-sm -translate-x-3/4 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div class="overflow-hidden rounded-lg shadow-2xl ring-1 ring-black ring-opacity-5">
                     <div class="relative grid gap-8 p-5 lg:grid-cols-2 bg-gray-700">
-                        <filterPopoverAvailableList user="MSY" :available-value="filterAvailableArray.msyAvailable"
-                            @update="(value) => filterAvailableArray.msyAvailable = value" />
-                        <filterPopoverAvailableList user="GIL" :available-value="filterAvailableArray.gilAvailable"
-                            @update="(value) => filterAvailableArray.gilAvailable = value" />
-                        <filterPopoverAvailableList user="Fulu" :available-value="filterAvailableArray.fuluAvailable"
-                            @update="(value) => filterAvailableArray.fuluAvailable = value" />
+                        <filterPopoverAvailableList user="MSY"
+                            :available-value="filterArray.songAvailableArray.msyAvailable"
+                            @update="(value) => filterArray.songAvailableArray.msyAvailable = value" />
+                        <filterPopoverAvailableList user="GIL"
+                            :available-value="filterArray.songAvailableArray.gilAvailable"
+                            @update="(value) => filterArray.songAvailableArray.gilAvailable = value" />
+                        <filterPopoverAvailableList user="Fulu"
+                            :available-value="filterArray.songAvailableArray.fuluAvailable"
+                            @update="(value) => filterArray.songAvailableArray.fuluAvailable = value" />
                     </div>
                     <div class="border-t-2 border-gray-600 mx-1"></div>
-                    <filterPopoverRange />
+                    <filterPopoverRange :scale-array="filterArray.songRangeArray"
+                        @update="(value) => filterArray.songRangeArray = value" />
                 </div>
             </PopoverPanel>
         </transition>

@@ -1,4 +1,4 @@
-import { Music, SongAvailableArray } from "../common/type"
+import { Music, ScaleType, SongAvailableArray } from "../common/type"
 
 export const filterMusicByWord = (data: Music[], filterWord: string): Music[] => {
     return data.filter((music) => {
@@ -27,4 +27,13 @@ export const filterMusicByIsAvailable = (data: Music[], filterAvailableArray: So
     }
 
     return filterdMusics
+}
+
+export const filterMusicByRange = (data: Music[], filterRangeArray: ScaleType[]) => {
+    if (filterRangeArray.length <= 0) {
+        return data
+    }
+    return data.filter((music) => {
+        return filterRangeArray.includes(music.max_key.replace(/hi/g, '') as ScaleType)
+    })
 }

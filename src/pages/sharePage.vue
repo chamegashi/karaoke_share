@@ -7,13 +7,13 @@ import {
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-import { Music, SongAvailableArray } from '../common/type'
+import { Music, SongAvailableArray, FilterArray } from '../common/type'
 import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
 
 import { getShareData, isLoading, responce } from '../api/shareMusics'
 import { useShareMusics } from '../stores/stores'
-import { filterMusicByWord, filterMusicByIsAvailable } from '../composable/filterMusic'
+import { filterMusicByWord, filterMusicByIsAvailable, filterMusicByRange } from '../composable/filterMusic'
 
 const $toast = useToast();
 
@@ -21,11 +21,15 @@ const header = ["曲", "MS", "GI", "Fu"]
 const musicdata = ref<Music[]>([]);
 const showdata = ref<Music[]>([]);
 const filterWord = ref<string>("");
-const filterAvailableArray = ref<SongAvailableArray>({
-    msyAvailable: [],
-    gilAvailable: [],
-    fuluAvailable: [],
-});
+const filterArray = ref<FilterArray>({
+    songAvailableArray: {
+        msyAvailable: [],
+        gilAvailable: [],
+        fuluAvailable: [],
+    },
+    songRangeArray: []
+})
+
 const storeShareMusics = useShareMusics()
 
 watch(responce, () => {
@@ -59,13 +63,15 @@ watch(responce, () => {
 
 watch(filterWord, () => {
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
-    showdata.value = filterMusicByIsAvailable(showdata.value, filterAvailableArray.value)
+    showdata.value = filterMusicByIsAvailable(showdata.value, filterArray.value.songAvailableArray)
+    showdata.value = filterMusicByRange(showdata.value, filterArray.value.songRangeArray)
 })
 
-const updateFilterAvailable = (data: SongAvailableArray) => {
-    filterAvailableArray.value = data
+const updateFilterAvailable = (data: FilterArray) => {
+    filterArray.value = data
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
-    showdata.value = filterMusicByIsAvailable(showdata.value, filterAvailableArray.value)
+    showdata.value = filterMusicByIsAvailable(showdata.value, filterArray.value.songAvailableArray)
+    showdata.value = filterMusicByRange(showdata.value, filterArray.value.songRangeArray)
 }
 
 const updateAvailable = (item: Music) => {

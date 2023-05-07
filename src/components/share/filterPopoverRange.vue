@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { ScaleType } from '../../common/type'
 
+const props = defineProps<{ scaleArray: ScaleType[] }>()
+const emit = defineEmits(['update']);
 
 const songRangeArray = ref<ScaleType[]>([])
 
@@ -13,7 +15,10 @@ const toggleSongRangeArray = (value: ScaleType) => {
     } else {
         songRangeArray.value.push(value)
     }
+    emit('update', songRangeArray.value)
 }
+
+songRangeArray.value = props.scaleArray
 
 </script>
 

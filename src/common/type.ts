@@ -38,3 +38,8 @@ export type SongAvailableArray = {
     gilAvailable: SongAvailable[],
     fuluAvailable: SongAvailable[],
 }
+
+export type LoadingData = {
+    id: string,
+    user: Users,
+}

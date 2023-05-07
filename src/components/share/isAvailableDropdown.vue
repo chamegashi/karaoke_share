@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { SongAvailable } from '../../common/type'
+import { SongAvailable, Users, LoadingData } from '../../common/type'
 import {
     XMarkIcon,
     CheckIcon,
@@ -8,17 +8,24 @@ import {
     QuestionMarkCircleIcon,
 } from '@heroicons/vue/24/solid'
 
-defineProps<{ availableNum: SongAvailable }>()
+const props = defineProps<{ availableNum: SongAvailable, musicId: string, user: Users, loadingData: LoadingData, isLoading: boolean }>()
+
+const isLoadingCondition = () => {
+    return props.musicId === props.loadingData.id && props.user === props.loadingData.user && props.isLoading
+}
 
 </script>
 
 <template>
     <Menu as="div" class="relative text-left w-full h-full">
         <MenuButton class="w-full h-full flex justify-center">
-            <QuestionMarkCircleIcon v-if="availableNum === 3" class="h-6 w-6 text-gray-300 m-auto" />
-            <CheckIcon v-if="availableNum === 2" class="h-6 w-6 text-green-300 m-auto" />
-            <ExclamationTriangleIcon v-if="availableNum === 1" class="h-6 w-6 text-yellow-300 m-auto" />
-            <XMarkIcon v-if="availableNum === 0" class="h-6 w-6 text-red-300 m-auto" />
+            <div v-if="isLoadingCondition()" className="animate-ping h-3 w-3 bg-white rounded-full z-10"></div>
+            <QuestionMarkCircleIcon v-if="availableNum === 3 && !isLoadingCondition()"
+                class="h-6 w-6 text-gray-300 m-auto" />
+            <CheckIcon v-if="availableNum === 2 && !isLoadingCondition()" class="h-6 w-6 text-green-300 m-auto" />
+            <ExclamationTriangleIcon v-if="availableNum === 1 && !isLoadingCondition()"
+                class="h-6 w-6 text-yellow-300 m-auto" />
+            <XMarkIcon v-if="availableNum === 0 && !isLoadingCondition()" class="h-6 w-6 text-red-300 m-auto" />
         </MenuButton>
 
         <transition>
@@ -29,7 +36,8 @@ defineProps<{ availableNum: SongAvailable }>()
                     <button :class="[
                             active ? 'bg-red-500 text-white' : 'text-gray-900',
                             'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                        ]" @click="$emit('update', 0)">
+                        ]
+                        " @click="$emit('update', 0)">
                         <XMarkIcon class="h-6 w-6 -rotate-90 text-red-300 m-auto" />
                     </button>
                     </MenuItem>
@@ -37,7 +45,8 @@ defineProps<{ availableNum: SongAvailable }>()
                     <button :class="[
                             active ? 'bg-yellow-500 text-white' : 'text-gray-900',
                             'group flex w-full items-center rounded-md px-2 py-2',
-                        ]" @click="$emit('update', 1)">
+                        ]
+                        " @click="$emit('update', 1)">
                         <ExclamationTriangleIcon class="h-6 w-6 -rotate-90 text-yellow-300 m-auto" />
                     </button>
                     </MenuItem>
@@ -45,7 +54,8 @@ defineProps<{ availableNum: SongAvailable }>()
                     <button :class="[
                             active ? 'bg-green-500 text-white' : 'text-gray-900',
                             'group flex w-full items-center rounded-md px-2 py-2',
-                        ]" @click="$emit('update', 2)">
+                        ]
+                        " @click="$emit('update', 2)">
                         <CheckIcon class="h-6 w-6 -rotate-90 text-green-300 m-auto" />
                     </button>
                     </MenuItem>
@@ -53,7 +63,8 @@ defineProps<{ availableNum: SongAvailable }>()
                     <button :class="[
                             active ? 'bg-green-500 text-white' : 'text-gray-900',
                             'group flex w-full items-center rounded-md px-2 py-2',
-                        ]" @click="$emit('update', 3)">
+                        ]
+                        " @click="$emit('update', 3)">
                         <QuestionMarkCircleIcon class="h-6 w-6 -rotate-90 text-gray-300 m-auto" />
                     </button>
                     </MenuItem>

@@ -7,12 +7,12 @@ import {
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-import { Music, FilterArray } from '../common/type'
+import { Music, FilterArray, Users } from '../common/type'
 import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
 import DetailEditDropdown from '../components/share/detailEditDropdown.vue'
 
-import { getShareData, updateShareIsAvailable, isLoading, responce, isAvailableResponce } from '../api/shareMusics'
+import { getShareData, updateShareIsAvailable, isLoading, responce, isAvailableResponce, isAvailableLoading } from '../api/shareMusics'
 import { useShareMusics } from '../stores/stores'
 import { filterMusicByWord, filterMusicByIsAvailable, filterMusicScale } from '../composable/filterMusic'
 
@@ -30,6 +30,8 @@ const filterArray = ref<FilterArray>({
     },
     songScaleArray: []
 })
+const availableLoadingUser = ref<Users>('MSY');
+const availableLoadingId = ref<string>("")
 
 const storeShareMusics = useShareMusics()
 
@@ -88,7 +90,9 @@ const updateFilterAvailable = (data: FilterArray) => {
     showdata.value = filterMusicScale(showdata.value, filterArray.value.songScaleArray)
 }
 
-const updateAvailable = (item: Music) => {
+const updateAvailable = (item: Music, user: Users) => {
+    availableLoadingUser.value = user
+    availableLoadingId.value = item.id
     updateShareIsAvailable(item.id, item.massann, item.gil, item.fulu)
 }
 
@@ -144,16 +148,22 @@ getShareData()
 
                         </td>
                         <td class="text-center bg-gray-600">
-                            <availableDropDown :available-num="item.massann"
-                                @update="(update) => { item.massann = update; updateAvailable(item) }" />
+                            <availableDropDown :available-num="item.massann" :music-id="item.id" :user="'MSY'"
+                                :is-loading="isAvailableLoading"
+                                :loading-data="{ 'id': availableLoadingId, 'user': availableLoadingUser }"
+                                @update="(update) => { item.massann = update; updateAvailable(item, 'MSY') }" />
                         </td>
                         <td class="text-center">
-                            <availableDropDown :available-num="item.gil"
-                                @update="(update) => { item.gil = update; updateAvailable(item) }" />
+                            <availableDropDown :available-num="item.gil" :music-id="item.id" :user="'GIL'"
+                                :is-loading="isAvailableLoading"
+                                :loading-data="{ 'id': availableLoadingId, 'user': availableLoadingUser }"
+                                @update="(update) => { item.gil = update; updateAvailable(item, 'GIL') }" />
                         </td>
                         <td class="text-center bg-gray-600">
-                            <availableDropDown :available-num="item.fulu"
-                                @update="(update) => { item.fulu = update; updateAvailable(item) }" />
+                            <availableDropDown :available-num="item.fulu" :music-id="item.id" :user="'Fulu'"
+                                :is-loading="isAvailableLoading"
+                                :loading-data="{ 'id': availableLoadingId, 'user': availableLoadingUser }"
+                                @update="(update) => { item.fulu = update; updateAvailable(item, 'Fulu') }" />
                         </td>
                     </tr>
                 </tbody>

@@ -29,11 +29,11 @@ export const filterMusicByIsAvailable = (data: Music[], filterAvailableArray: So
     return filterdMusics
 }
 
-export const filterMusicByRange = (data: Music[], filterRangeArray: ScaleType[]) => {
-    if (filterRangeArray.length <= 0) {
+export const filterMusicScale = (data: Music[], filterScaleArray: ScaleType[]) => {
+    if (filterScaleArray.length <= 0) {
         return data
     }
     return data.filter((music) => {
-        return filterRangeArray.includes(music.max_key.replace(/hi/g, '') as ScaleType)
+        return filterScaleArray.includes(music.max_key.replace(/hi/g, '') as ScaleType)
     })
 }

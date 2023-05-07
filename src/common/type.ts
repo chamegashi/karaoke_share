@@ -30,7 +30,7 @@ export type ShareMusicResponce = {
 
 export type FilterArray = {
     songAvailableArray: SongAvailableArray
-    songRangeArray: ScaleType[]
+    songScaleArray: ScaleType[]
 }
 
 export type SongAvailableArray = {

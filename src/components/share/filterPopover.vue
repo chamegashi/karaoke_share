@@ -7,7 +7,7 @@ import {
 
 import { FilterArray } from '../../common/type'
 import filterPopoverAvailableList from './filterPopoverAvailableList.vue'
-import filterPopoverRange from './filterPopoverRange.vue'
+import filterPopoverScale from './filterPopoverScale.vue'
 
 const emit = defineEmits(['update']);
 
@@ -17,7 +17,7 @@ const filterArray = ref<FilterArray>({
         gilAvailable: [],
         fuluAvailable: [],
     },
-    songRangeArray: []
+    songScaleArray: []
 })
 
 watch(filterArray.value, () => {
@@ -49,8 +49,8 @@ watch(filterArray.value, () => {
                             @update="(value) => filterArray.songAvailableArray.fuluAvailable = value" />
                     </div>
                     <div class="border-t-2 border-gray-600 mx-1"></div>
-                    <filterPopoverRange :scale-array="filterArray.songRangeArray"
-                        @update="(value) => filterArray.songRangeArray = value" />
+                    <filterPopoverScale :scale-array="filterArray.songScaleArray"
+                        @update="(value) => filterArray.songScaleArray = value" />
                 </div>
             </PopoverPanel>
         </transition>

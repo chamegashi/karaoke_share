@@ -7,13 +7,13 @@ import {
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-import { Music, SongAvailableArray, FilterArray } from '../common/type'
+import { Music, FilterArray } from '../common/type'
 import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
 
 import { getShareData, isLoading, responce } from '../api/shareMusics'
 import { useShareMusics } from '../stores/stores'
-import { filterMusicByWord, filterMusicByIsAvailable, filterMusicByRange } from '../composable/filterMusic'
+import { filterMusicByWord, filterMusicByIsAvailable, filterMusicScale } from '../composable/filterMusic'
 
 const $toast = useToast();
 
@@ -27,7 +27,7 @@ const filterArray = ref<FilterArray>({
         gilAvailable: [],
         fuluAvailable: [],
     },
-    songRangeArray: []
+    songScaleArray: []
 })
 
 const storeShareMusics = useShareMusics()
@@ -64,14 +64,14 @@ watch(responce, () => {
 watch(filterWord, () => {
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
     showdata.value = filterMusicByIsAvailable(showdata.value, filterArray.value.songAvailableArray)
-    showdata.value = filterMusicByRange(showdata.value, filterArray.value.songRangeArray)
+    showdata.value = filterMusicScale(showdata.value, filterArray.value.songScaleArray)
 })
 
 const updateFilterAvailable = (data: FilterArray) => {
     filterArray.value = data
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
     showdata.value = filterMusicByIsAvailable(showdata.value, filterArray.value.songAvailableArray)
-    showdata.value = filterMusicByRange(showdata.value, filterArray.value.songRangeArray)
+    showdata.value = filterMusicScale(showdata.value, filterArray.value.songScaleArray)
 }
 
 const updateAvailable = (item: Music) => {

@@ -1,7 +1,7 @@
 export type Users = 'MSY' | 'GIL' | 'Fulu'
 
-// 歌えない(X): 0, そこそこ(△): 1, 歌える(O): 2
-export type SongAvailable = 0 | 1 | 2
+// 歌えない(X): 0, そこそこ(△): 1, 歌える(O): 2, わからない(?): 3
+export type SongAvailable = 0 | 1 | 2 | 3
 
 export type RangeType = 'notSelected' | 'mid2' | 'hi' | 'hihi'
 export type ScaleType = 'A' | 'A#' | 'B' | 'C' | 'C#' | 'D' | 'D#' | 'E' | 'F' | 'F#' | 'G' | 'G#'

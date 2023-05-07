@@ -4,6 +4,7 @@ import {
     XMarkIcon,
     CheckIcon,
     ExclamationTriangleIcon,
+    QuestionMarkCircleIcon,
 } from '@heroicons/vue/24/solid'
 
 import { SongAvailable, Users } from '../../common/type'
@@ -32,6 +33,10 @@ const toggleValue = (input: SongAvailable) => {
         <div class="text-white m-auto">
             {{ user }}
         </div>
+        <button class="border border-gray-400 rounded p-1" @click="toggleValue(3)"
+            :class="{ 'bg-gray-500': filterValues.includes(3) }">
+            <QuestionMarkCircleIcon class="h-6 w-6 text-gray-300 m-auto" />
+        </button>
         <button class="border border-gray-400 rounded p-1" @click="toggleValue(2)"
             :class="{ 'bg-gray-500': filterValues.includes(2) }">
             <CheckIcon class=" h-6 w-6 text-green-300 m-auto" />

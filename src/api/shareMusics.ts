@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ShareMusicResponce, SongAvailable } from '../common/type';
+import { Music, ShareMusicResponce, SongAvailable } from '../common/type';
 import { ref } from 'vue';
 
 const VITE_API_URL = 'https://pykaraokebackend.onrender.com/api/'
@@ -10,6 +10,9 @@ export const error = ref("")
 
 export const isAvailableResponce = ref<Boolean | null>()
 export const isAvailableLoading = ref(false)
+
+export const registResponce = ref<Boolean | null>()
+export const isregistLoading = ref(false)
 
 export const getShareData = () => {
     isLoading.value = true
@@ -44,16 +47,16 @@ export const updateShareIsAvailable = (id: string, msy: SongAvailable, gil: Song
         })
 }
 
-export const registShareData = () => {
+export const registShareData = (music: Music) => {
     isLoading.value = true
     const params = new URLSearchParams({});
-    params.append('title', 'INTERNET_OVERDOSE');
-    params.append('hiragana', 'いんたーねっとおーばーどーず');
-    params.append('artist', 'KOTOKO');
-    params.append('max_key', 'hiE');
-    params.append('is_available_msy', '2');
-    params.append('is_available_gil', '2');
-    params.append('is_available_fulu', '2');
+    params.append('title', music.title);
+    params.append('hiragana', music.hiragana);
+    params.append('artist', music.artist);
+    params.append('max_key', music.max_key);
+    params.append('is_available_msy', String(music.massann));
+    params.append('is_available_gil', String(music.gil));
+    params.append('is_available_fulu', String(music.fulu));
     axios.post(VITE_API_URL + 'share_music/regist', params)
         .then(function (res) {
             responce.value = res.data.result

@@ -1,14 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { ScaleType, RangeType, SongAvailable, Users } from '../common/type'
+import { ref, watch } from 'vue'
+import { ScaleType, RangeType, SongAvailable, Users, Music } from '../common/type'
 import {
     XMarkIcon,
     CheckIcon,
     ExclamationTriangleIcon,
     ArrowUturnLeftIcon,
 } from '@heroicons/vue/24/solid'
+import { useToast } from 'vue-toast-notification';
 
-import { registShareData, isLoading, responce } from '../api/shareMusics'
+import { registShareData, isregistLoading, registResponce } from '../api/shareMusics'
+
+const $toast = useToast();
+
+const titleValue = ref<string>("");
+const titleValidation = ref<boolean>(false);
+const hiraganaValue = ref<string>("");
+const hiraganaValidation = ref<boolean>(false);
+const artistValue = ref<string>("");
+const artistValidation = ref<boolean>(false);
 
 const rangeValue = ref<RangeType>('hi');
 const pianoValue = ref<ScaleType>('A');
@@ -34,6 +44,65 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
     }
 }
 
+const send = () => {
+    if (!validate()) {
+        $toast.open({
+            message: '失敗...',
+            type: 'error',
+            position: 'bottom-left'
+        })
+        return
+    }
+
+    registShareData(makeResistData())
+}
+
+const validate = (): boolean => {
+    let flag = true
+    if (titleValue.value.length <= 0) {
+        titleValidation.value = true
+        flag = false
+    }
+    if (hiraganaValue.value.length <= 0) {
+        hiraganaValidation.value = true
+        flag = false
+    }
+    if (artistValue.value.length <= 0) {
+        artistValidation.value = true
+        flag = false
+    }
+
+    return flag
+}
+
+
+const makeResistData = (): Music => {
+    return {
+        id: '',
+        title: titleValue.value,
+        hiragana: hiraganaValue.value,
+        artist: artistValue.value,
+        max_key: rangeValue.value === 'notSelected' ? '' : rangeValue.value + pianoValue.value,
+        massann: msyValue.value,
+        gil: gilValue.value,
+        fulu: fuluValue.value
+    }
+}
+
+watch(registResponce, () => {
+    $toast.open({
+        message: 'かんりょう！',
+        type: 'success',
+        position: 'bottom-left'
+    })
+    titleValue.value = ""
+    hiraganaValue.value = ""
+    artistValue.value = ""
+    msyValue.value = 0
+    gilValue.value = 0
+    fuluValue.value = 0
+})
+
 </script>
 
 <template>
@@ -45,15 +114,15 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
         </div>
         <div class="w-5/6 mx-auto">
             <p class="text-white">曲タイトル</p>
-            <input class="w-full p-1 rounded">
+            <input class="w-full p-1 rounded" v-model="titleValue">
         </div>
         <div class="w-5/6 mx-auto mt-2">
             <p class="text-white">曲ひらがなタイトル</p>
-            <input class="w-full p-1 rounded">
+            <input class="w-full p-1 rounded" v-model="hiraganaValue">
         </div>
         <div class="w-5/6 mx-auto mt-2">
             <p class="text-white">アーティスト</p>
-            <input class="w-full p-1 rounded">
+            <input class="w-full p-1 rounded" v-model="artistValue">
         </div>
 
 
@@ -192,7 +261,7 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
 
         <div class="text-center mt-6">
             <button class="border border-blue-800 rounded py-3 px-6 bg-blue-600 text-white"
-                @click="registShareData()">登録</button>
+                :class="{ 'bg-blue-800': isregistLoading }" :disabled="isregistLoading" @click="send()">登録</button>
         </div>
 
 

@@ -69,7 +69,6 @@ const updateFilterAvailable = (data: SongAvailableArray) => {
 }
 
 const updateAvailable = (item: Music) => {
-    console.log(item)
     $toast.open({
         message: 'こうしん！',
         type: 'success',

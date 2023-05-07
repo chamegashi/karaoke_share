@@ -7,6 +7,7 @@ import {
 
 import { SongAvailableArray } from '../../common/type'
 import filterPopoverAvailableList from './filterPopoverAvailableList.vue'
+import filterPopoverRange from './filterPopoverRange.vue'
 
 const emit = defineEmits(['update']);
 
@@ -41,6 +42,8 @@ watch(filterAvailableArray.value, () => {
                         <filterPopoverAvailableList user="Fulu" :available-value="filterAvailableArray.fuluAvailable"
                             @update="(value) => filterAvailableArray.fuluAvailable = value" />
                     </div>
+                    <div class="border-t-2 border-gray-600 mx-1"></div>
+                    <filterPopoverRange />
                 </div>
             </PopoverPanel>
         </transition>

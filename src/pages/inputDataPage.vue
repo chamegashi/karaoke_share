@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { PianoType, RangeType, SongAvailable, Users } from '../common/type'
+import { ScaleType, RangeType, SongAvailable, Users } from '../common/type'
 import {
     XMarkIcon,
     CheckIcon,
@@ -9,7 +9,7 @@ import {
 } from '@heroicons/vue/24/solid'
 
 const rangeValue = ref<RangeType>('hi');
-const pianoValue = ref<PianoType>('A');
+const pianoValue = ref<ScaleType>('A');
 const msyValue = ref<SongAvailable>(0);
 const gilValue = ref<SongAvailable>(0);
 const fuluValue = ref<SongAvailable>(0);
@@ -18,7 +18,7 @@ const toggleRange = (value: RangeType) => {
     rangeValue.value = value
 }
 
-const changePiano = (value: PianoType) => {
+const changePiano = (value: ScaleType) => {
     pianoValue.value = value
 }
 
@@ -35,7 +35,7 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
 </script>
 
 <template>
-    <div class="relative bg-gray-700 h-screen">
+    <div class="relative bg-gray-700 overflow-x-hidden main-view">
         <div class="pt-2 mb-3 mx-3">
             <button class="border rounded py-2 px-4" @click="$router.push('/')">
                 <ArrowUturnLeftIcon class="h-6 w-6 text-white" />
@@ -74,28 +74,28 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
                 <div class="w-9/12 h-40 my-auto relative">
                     <div class="absolute left-0 top-0 w-screen h-40 flex ml-6">
                         <div @click="changePiano('A')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'A' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'A' }">
                         </div>
                         <div @click="changePiano('B')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'B' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'B' }">
                         </div>
                         <div @click="changePiano('C')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'C' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'C' }">
                         </div>
                         <div @click="changePiano('D')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'D' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'D' }">
                         </div>
                         <div @click="changePiano('E')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'E' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'E' }">
                         </div>
                         <div @click="changePiano('F')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'F' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'F' }">
                         </div>
                         <div @click="changePiano('G')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'G' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'G' }">
                         </div>
                         <div @click="changePiano('A')" class="bg-white w-6 h-full mx-0.5 rounded"
-                            :class="{ 'bg-blue-700': pianoValue === 'A' }">
+                            :class="{ 'bg-blue-800': pianoValue === 'A' }">
                         </div>
                     </div>
                     <div class="absolute left-0 top-0 w-screen h-24 flex ml-6">
@@ -195,3 +195,9 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
 
     </div>
 </template>
+
+<style>
+.main-view {
+    height: 100svh
+}
+</style>

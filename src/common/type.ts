@@ -4,7 +4,7 @@ export type Users = 'MSY' | 'GIL' | 'Fulu'
 export type SongAvailable = 0 | 1 | 2
 
 export type RangeType = 'notSelected' | 'mid2' | 'hi' | 'hihi'
-export type PianoType = 'A' | 'A#' | 'B' | 'C' | 'C#' | 'D' | 'D#' | 'E' | 'F' | 'F#' | 'G' | 'G#'
+export type ScaleType = 'A' | 'A#' | 'B' | 'C' | 'C#' | 'D' | 'D#' | 'E' | 'F' | 'F#' | 'G' | 'G#'
 
 export type Music = {
     id: string,
@@ -26,6 +26,11 @@ export type ShareMusicResponce = {
     is_available_msy: SongAvailable,
     is_available_gil: SongAvailable,
     is_available_fulu: SongAvailable,
+}
+
+export type FilterArray = {
+    songAvailableArray: SongAvailableArray
+    songRangeArray: ScaleType[]
 }
 
 export type SongAvailableArray = {

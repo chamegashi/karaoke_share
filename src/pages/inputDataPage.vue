@@ -8,6 +8,8 @@ import {
     ArrowUturnLeftIcon,
 } from '@heroicons/vue/24/solid'
 
+import { registShareData, isLoading, responce } from '../api/shareMusics'
+
 const rangeValue = ref<RangeType>('hi');
 const pianoValue = ref<ScaleType>('A');
 const msyValue = ref<SongAvailable>(0);
@@ -189,7 +191,8 @@ const toggleAvailable = (value: SongAvailable, name: Users) => {
         </div>
 
         <div class="text-center mt-6">
-            <button class="border border-blue-800 rounded py-3 px-6 bg-blue-600 text-white">登録</button>
+            <button class="border border-blue-800 rounded py-3 px-6 bg-blue-600 text-white"
+                @click="registShareData()">登録</button>
         </div>
 
 

@@ -12,7 +12,7 @@ import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
 import DetailEditDropdown from '../components/share/detailEditDropdown.vue'
 
-import { getShareData, isLoading, responce } from '../api/shareMusics'
+import { getShareData, updateShareIsAvailable, isLoading, responce, isAvailableResponce } from '../api/shareMusics'
 import { useShareMusics } from '../stores/stores'
 import { filterMusicByWord, filterMusicByIsAvailable, filterMusicScale } from '../composable/filterMusic'
 
@@ -62,6 +62,19 @@ watch(responce, () => {
     storeShareMusics.updateMusic(newShareData)
 })
 
+watch(isAvailableResponce, () => {
+    if (!isAvailableResponce.value) {
+        return
+    }
+
+    $toast.open({
+        message: 'こうしん！',
+        type: 'success',
+        position: 'bottom-left'
+    })
+
+})
+
 watch(filterWord, () => {
     showdata.value = filterMusicByWord(musicdata.value, filterWord.value)
     showdata.value = filterMusicByIsAvailable(showdata.value, filterArray.value.songAvailableArray)
@@ -76,11 +89,7 @@ const updateFilterAvailable = (data: FilterArray) => {
 }
 
 const updateAvailable = (item: Music) => {
-    $toast.open({
-        message: 'こうしん！',
-        type: 'success',
-        position: 'bottom-left'
-    })
+    updateShareIsAvailable(item.id, item.massann, item.gil, item.fulu)
 }
 
 getShareData()

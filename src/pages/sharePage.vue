@@ -10,6 +10,7 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import { Music, FilterArray } from '../common/type'
 import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
+import DetailEditDropdown from '../components/share/detailEditDropdown.vue'
 
 import { getShareData, isLoading, responce } from '../api/shareMusics'
 import { useShareMusics } from '../stores/stores'
@@ -122,12 +123,16 @@ getShareData()
                 </thead>
                 <tbody>
                     <tr v-for="item in showdata" :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
-                        <td class="py-2">
+                        <td class="py-2 relative">
                             <p class="pl-1">{{ item.title }}</p>
                             <div class="flex">
                                 <p class="pl-1 w-4/6 text-xs text-gray-400">{{ item.artist }}</p>
                                 <p class="pl-1 w-2/6 text-xs text-gray-400">maxkey: {{ item.max_key }}</p>
                             </div>
+                            <button class="absolute w-7 h-7 top-0 right-1">
+                                <DetailEditDropdown />
+                            </button>
+
                         </td>
                         <td class="text-center bg-gray-600">
                             <availableDropDown :available-num="item.massann"

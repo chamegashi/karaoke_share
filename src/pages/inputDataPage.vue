@@ -171,48 +171,77 @@ watch(registResponce, () => {
                 </div>
                 <div class="w-9/12 h-40 my-auto relative">
                     <div class="absolute left-0 top-0 w-screen h-40 flex ml-6">
-                        <div @click="changePiano('A')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('A')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'A', 'bg-white': pianoValue !== 'A' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'A', 'text-black': pianoValue !== 'A' }">A
+                            </div>
                         </div>
-                        <div @click="changePiano('B')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('B')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'B', 'bg-white': pianoValue !== 'B' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'B', 'text-black': pianoValue !== 'B' }">B
+                            </div>
                         </div>
-                        <div @click="changePiano('C')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('C')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'C', 'bg-white': pianoValue !== 'C' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'C', 'text-black': pianoValue !== 'C' }">C
+                            </div>
                         </div>
-                        <div @click="changePiano('D')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('D')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'D', 'bg-white': pianoValue !== 'D' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'D', 'text-black': pianoValue !== 'D' }">D
+                            </div>
                         </div>
-                        <div @click="changePiano('E')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('E')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'E', 'bg-white': pianoValue !== 'E' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'E', 'text-black': pianoValue !== 'E' }">E
+                            </div>
                         </div>
-                        <div @click="changePiano('F')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('F')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'F', 'bg-white': pianoValue !== 'F' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'F', 'text-black': pianoValue !== 'F' }">F
+                            </div>
                         </div>
-                        <div @click="changePiano('G')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('G')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'G', 'bg-white': pianoValue !== 'G' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'G', 'text-black': pianoValue !== 'G' }">G
+                            </div>
                         </div>
-                        <div @click="changePiano('A')" class="w-6 h-full mx-0.5 rounded"
+                        <div @click="changePiano('A')" class="relative w-6 h-full mx-0.5 rounded"
                             :class="{ 'bg-blue-600': pianoValue === 'A', 'bg-white': pianoValue !== 'A' }">
+                            <div class="absolute bottom-0 text-xl left-1.5"
+                                :class="{ 'text-white': pianoValue === 'A', 'text-black': pianoValue !== 'A' }">A
+                            </div>
                         </div>
                     </div>
                     <div class="absolute left-0 top-0 w-screen h-24 flex ml-6">
                         <div @click="changePiano('A#')" class="w-6 h-full z-10 translate-x-4"
                             :class="{ 'bg-blue-600': pianoValue === 'A#', 'bg-black': pianoValue !== 'A#' }">
+                            <div class="absolute bottom-0 text-base left-0.5 text-white">A#</div>
                         </div>
                         <div class="w-6 mx-1"></div>
                         <div @click="changePiano('C#')" class="h-full w-6 z-10 translate-x-4"
                             :class="{ 'bg-blue-600': pianoValue === 'C#', 'bg-black': pianoValue !== 'C#' }">
+                            <div class="absolute bottom-0 text-base left-0.5 text-white">C#</div>
                         </div>
                         <div @click="changePiano('D#')" class="h-full w-6 z-10 mx-0.5 translate-x-4"
                             :class="{ 'bg-blue-600': pianoValue === 'D#', 'bg-black': pianoValue !== 'D#' }">
+                            <div class="absolute bottom-0 text-base left-0.5 text-white">D#</div>
                         </div>
                         <div class="w-6 mx-1"></div>
                         <div @click="changePiano('F#')" class="h-full w-6 z-10 translate-x-4"
                             :class="{ 'bg-blue-600': pianoValue === 'F#', 'bg-black': pianoValue !== 'F#' }">
+                            <div class="absolute bottom-0 text-base left-0.5 text-white">F#</div>
                         </div>
                         <div @click="changePiano('G#')" class="h-full w-6 mx-0.5 translate-x-4 z-10"
                             :class="{ 'bg-blue-600': pianoValue === 'G#', 'bg-black': pianoValue !== 'G#' }">
+                            <div class="absolute bottom-0 text-base left-0.5 text-white">G#</div>
                         </div>
                     </div>
                 </div>

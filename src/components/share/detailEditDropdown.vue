@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import {
     EllipsisHorizontalIcon,
@@ -34,7 +35,7 @@ import {
                     <button :class="[
                             active ? 'bg-red-500 text-white' : 'text-gray-900',
                             'group flex w-full items-center rounded-md px-2 py-2',
-                        ]" @click="$emit('update', 1)">
+                        ]" @click="$emit('delete')">
                         <ArchiveBoxXMarkIcon class="w-5 h-5 text-red-400 mr-2" />
                         <p class="text-red-400 text-lg">削除</p>
                     </button>

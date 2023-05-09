@@ -8,9 +8,11 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
 import { Music, FilterArray, Users } from '../common/type'
+
 import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
 import DetailEditDropdown from '../components/share/detailEditDropdown.vue'
+import DeletedDialog from '../components/share/deletedialog.vue';
 
 import { getShareData, updateShareIsAvailable, isLoading, responce, isAvailableResponce, isAvailableLoading } from '../api/shareMusics'
 import { useShareMusics } from '../stores/stores'
@@ -30,6 +32,9 @@ const filterArray = ref<FilterArray>({
     },
     songScaleArray: []
 })
+
+const isDeleteDialog = ref<boolean>(false)
+
 const availableLoadingUser = ref<Users>('MSY');
 const availableLoadingId = ref<string>("")
 
@@ -144,7 +149,7 @@ getShareData()
                                     item.max_key }}</p>
                             </div>
                             <button class="absolute w-7 h-7 top-0 right-1">
-                                <DetailEditDropdown />
+                                <DetailEditDropdown @delete="isDeleteDialog = true" />
                             </button>
 
                         </td>
@@ -174,12 +179,13 @@ getShareData()
             </div>
         </div>
 
-
         <!-- button -->
         <button class="absolute bottom-4 left-2/4 -translate-x-2/4 p-2 rounded-full bg-blue-500"
             @click="$router.push('/edit')">
             <PlusIcon class="w-8 h-8 text-white" />
         </button>
+
+        <DeletedDialog v-if="isDeleteDialog" @close="isDeleteDialog = false" />
 
     </div>
 </template>

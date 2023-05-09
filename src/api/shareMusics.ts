@@ -2,16 +2,17 @@ import axios from 'axios';
 import { Music, ShareMusicResponce, SongAvailable } from '../common/type';
 import { ref } from 'vue';
 
-const VITE_API_URL = 'https://pykaraokebackend.onrender.com/api/'
+const VITE_API_URL = 'http://localhost:5000/api/'
+// const VITE_API_URL = 'https://pykaraokebackend.onrender.com/api/'
 
 export const responce = ref<ShareMusicResponce[] | null>()
 export const isLoading = ref(false)
 export const error = ref("")
 
-export const isAvailableResponce = ref<Boolean | null>()
+export const isAvailableResponce = ref<string | null>()
 export const isAvailableLoading = ref(false)
 
-export const registResponce = ref<Boolean | null>()
+export const registResponce = ref<string | null>()
 export const isregistLoading = ref(false)
 
 export const getShareData = () => {
@@ -48,7 +49,7 @@ export const updateShareIsAvailable = (id: string, msy: SongAvailable, gil: Song
 }
 
 export const registShareData = (music: Music) => {
-    isLoading.value = true
+    isregistLoading.value = true
     const params = new URLSearchParams({});
     params.append('title', music.title);
     params.append('hiragana', music.hiragana);
@@ -59,13 +60,13 @@ export const registShareData = (music: Music) => {
     params.append('is_available_fulu', String(music.fulu));
     axios.post(VITE_API_URL + 'share_music/regist', params)
         .then(function (res) {
-            responce.value = res.data.result
+            registResponce.value = res.data.result
         })
         .catch(function (error) {
             console.log(error)
         })
         .finally(function () {
-            isLoading.value = false
+            isregistLoading.value = false
         })
 }
 

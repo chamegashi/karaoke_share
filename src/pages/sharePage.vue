@@ -140,7 +140,8 @@ getShareData()
                             <p class="pl-1">{{ item.title }}</p>
                             <div class="flex">
                                 <p class="pl-1 w-4/6 text-xs text-gray-400">{{ item.artist }}</p>
-                                <p class="pl-1 w-2/6 text-xs text-gray-400">maxkey: {{ item.max_key }}</p>
+                                <p class="pl-1 w-2/6 text-xs text-gray-400">maxkey: {{ item.max_key === '' ? '未設定' :
+                                    item.max_key }}</p>
                             </div>
                             <button class="absolute w-7 h-7 top-0 right-1">
                                 <DetailEditDropdown />

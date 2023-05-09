@@ -100,7 +100,6 @@ const makeResistData = (): Music => {
 }
 
 watch(registResponce, () => {
-    console.log(registResponce.value)
     $toast.open({
         message: 'かんりょう！',
         type: 'success',

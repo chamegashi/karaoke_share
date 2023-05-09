@@ -12,9 +12,13 @@ import { Music, FilterArray, Users } from '../common/type'
 import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
 import DetailEditDropdown from '../components/share/detailEditDropdown.vue'
-import DeletedDialog from '../components/share/deletedialog.vue';
+import DeletedDialog from '../components/share/deleteDialog.vue';
 
-import { getShareData, updateShareIsAvailable, isLoading, responce, isAvailableResponce, isAvailableLoading } from '../api/shareMusics'
+import {
+    getShareData,
+    deleteShareData,
+    updateShareIsAvailable, isLoading, responce, isAvailableResponce, isAvailableLoading, deleteResponce, isDeleteLoading
+} from '../api/shareMusics'
 import { useShareMusics } from '../stores/stores'
 import { filterMusicByWord, filterMusicByIsAvailable, filterMusicScale } from '../composable/filterMusic'
 
@@ -34,6 +38,16 @@ const filterArray = ref<FilterArray>({
 })
 
 const isDeleteDialog = ref<boolean>(false)
+const deleteMusicData = ref<Music>({
+    id: "",
+    title: "",
+    artist: "",
+    hiragana: "",
+    max_key: "",
+    massann: 0,
+    gil: 0,
+    fulu: 0,
+})
 
 const availableLoadingUser = ref<Users>('MSY');
 const availableLoadingId = ref<string>("")
@@ -79,7 +93,19 @@ watch(isAvailableResponce, () => {
         type: 'success',
         position: 'bottom-left'
     })
+})
 
+watch(deleteResponce, () => {
+    if (!deleteResponce.value) {
+        return
+    }
+
+    $toast.open({
+        message: 'さくじょ！',
+        type: 'success',
+        position: 'bottom-left'
+    })
+    getShareData()
 })
 
 watch(filterWord, () => {
@@ -99,6 +125,10 @@ const updateAvailable = (item: Music, user: Users) => {
     availableLoadingUser.value = user
     availableLoadingId.value = item.id
     updateShareIsAvailable(item.id, item.massann, item.gil, item.fulu)
+}
+
+const deleteMusic = (music: Music) => {
+    deleteShareData(music)
 }
 
 getShareData()
@@ -140,7 +170,7 @@ getShareData()
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in showdata" :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
+                    <tr v-for="item in  showdata " :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
                         <td class="py-2 relative">
                             <p class="pl-1">{{ item.title }}</p>
                             <div class="flex">
@@ -149,7 +179,8 @@ getShareData()
                                     item.max_key }}</p>
                             </div>
                             <button class="absolute w-7 h-7 top-0 right-1">
-                                <DetailEditDropdown @delete="isDeleteDialog = true" />
+                                <DetailEditDropdown :music="item"
+                                    @delete="(value) => { isDeleteDialog = true; deleteMusicData = value }" />
                             </button>
 
                         </td>
@@ -185,7 +216,8 @@ getShareData()
             <PlusIcon class="w-8 h-8 text-white" />
         </button>
 
-        <DeletedDialog v-if="isDeleteDialog" @close="isDeleteDialog = false" />
+        <DeletedDialog :delete-responce="deleteResponce" :is-loading="isDeleteLoading" :music="deleteMusicData"
+            v-if="isDeleteDialog" @close="isDeleteDialog = false" @delete="deleteMusic(deleteMusicData)" />
 
     </div>
 </template>

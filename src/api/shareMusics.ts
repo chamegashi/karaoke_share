@@ -9,11 +9,14 @@ export const responce = ref<ShareMusicResponce[] | null>()
 export const isLoading = ref(false)
 export const error = ref("")
 
-export const isAvailableResponce = ref<string | null>()
+export const isAvailableResponce = ref<string>("")
 export const isAvailableLoading = ref(false)
 
-export const registResponce = ref<string | null>()
+export const registResponce = ref<string>("")
 export const isregistLoading = ref(false)
+
+export const deleteResponce = ref<string>("")
+export const isDeleteLoading = ref(false)
 
 export const getShareData = () => {
     isLoading.value = true
@@ -67,6 +70,22 @@ export const registShareData = (music: Music) => {
         })
         .finally(function () {
             isregistLoading.value = false
+        })
+}
+
+export const deleteShareData = (music: Music) => {
+    isDeleteLoading.value = true
+    const params = new URLSearchParams({});
+    params.append('id', music.id);
+    axios.post(VITE_API_URL + 'share_music/delete', params)
+        .then(function (res) {
+            deleteResponce.value = res.data.result
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+        .finally(function () {
+            isDeleteLoading.value = false
         })
 }
 

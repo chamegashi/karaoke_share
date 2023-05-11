@@ -63,11 +63,11 @@ watch(responce, () => {
         return
     }
 
-    if (storeShareMusics.musics.length > 0) {
-        musicdata.value = storeShareMusics.musics
-        showdata.value = storeShareMusics.musics
-        return
-    }
+    // if (storeShareMusics.musics.length > 0) {
+    //     musicdata.value = storeShareMusics.musics
+    //     showdata.value = storeShareMusics.musics
+    //     return
+    // }
 
     let newShareData: Music[] = []
     responce.value.forEach(element => {
@@ -176,7 +176,7 @@ getShareData()
         <!-- table -->
         <div v-else class="relative mx-2 overflow-auto h-5/6">
             <table class="w-full">
-                <thead class="py-2">
+                <thead class="py-2 z-20 sticky">
                     <tr class="text-gray-200">
                         <th class="w-9/12 py-2 sticky top-0 border-b-2 border-gray-300 bg-gray-700">{{ header[0] }}</th>
                         <th class="w-1/12 sticky top-0 border-b-2 border-gray-300 bg-gray-700">{{ header[1] }}</th>

@@ -76,7 +76,7 @@ const validate = (): boolean => {
         titleValidation.value = false
     }
 
-    if (hiraganaValue.value.length <= 0 || !hiraganaValue.value.match(/^[ぁ-んー ]*$/)) {
+    if (hiraganaValue.value.length <= 0 || !hiraganaValue.value.match(/^[ぁ-んゔー ]*$/)) {
         hiraganaValidation.value = true
         flag = false
     } else {

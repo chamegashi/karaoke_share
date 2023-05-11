@@ -29,7 +29,7 @@ const toggleValue = (input: SongAvailable) => {
 </script>
 
 <template>
-    <div class="flex gap-2">
+    <div class="flex gap-2 z-20">
         <div class="text-white m-auto">
             {{ user }}
         </div>

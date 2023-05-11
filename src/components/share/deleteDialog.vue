@@ -29,6 +29,7 @@ watch(() => props.deleteResponce, () => {
     }
     closeModal()
 });
+
 </script>
 
 <template>

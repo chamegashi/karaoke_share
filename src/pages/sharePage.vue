@@ -6,8 +6,10 @@ import {
 } from '@heroicons/vue/24/solid'
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import { useRouter } from 'vue-router'
 
 import { Music, FilterArray, Users } from '../common/type'
+import { useEditMusic } from '../stores/stores';
 
 import availableDropDown from '../components/share/isAvailableDropdown.vue'
 import FilterPopover from '../components/share/filterPopover.vue'
@@ -23,6 +25,8 @@ import { useShareMusics } from '../stores/stores'
 import { filterMusicByWord, filterMusicByIsAvailable, filterMusicScale } from '../composable/filterMusic'
 
 const $toast = useToast();
+const editMusic = useEditMusic();
+const router = useRouter()
 
 const header = ["曲", "MS", "GI", "Fu"]
 const musicdata = ref<Music[]>([]);
@@ -131,6 +135,17 @@ const deleteMusic = (music: Music) => {
     deleteShareData(music)
 }
 
+const pushMudicEdit = (music: Music) => {
+    editMusic.updateEditMusic(music)
+    editMusic.isEdit = true
+    router.push('/edit')
+}
+
+const pushNewMusicEdit = () => {
+    editMusic.isEdit = false
+    router.push('/edit')
+}
+
 getShareData()
 
 </script>
@@ -170,7 +185,7 @@ getShareData()
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in  showdata " :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
+                    <tr v-for="item in   showdata  " :key="item.id" class="text-gray-200 border-b-2 border-gray-400">
                         <td class="py-2 relative">
                             <p class="pl-1">{{ item.title }}</p>
                             <div class="flex">
@@ -180,7 +195,9 @@ getShareData()
                             </div>
                             <button class="absolute w-7 h-7 top-0 right-1">
                                 <DetailEditDropdown :music="item"
-                                    @delete="(value) => { isDeleteDialog = true; deleteMusicData = value }" />
+                                    @delete="(value) => { isDeleteDialog = true; deleteMusicData = value }" @update="(value) => {
+                                            pushMudicEdit(value)
+                                        }" />
                             </button>
 
                         </td>
@@ -212,7 +229,7 @@ getShareData()
 
         <!-- button -->
         <button class="absolute bottom-4 left-2/4 -translate-x-2/4 p-2 rounded-full bg-blue-500"
-            @click="$router.push('/edit')">
+            @click="pushNewMusicEdit()">
             <PlusIcon class="w-8 h-8 text-white" />
         </button>
 

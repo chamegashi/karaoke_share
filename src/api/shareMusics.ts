@@ -18,6 +18,9 @@ export const isregistLoading = ref(false)
 export const deleteResponce = ref<string>("")
 export const isDeleteLoading = ref(false)
 
+export const updateResponce = ref<string>("")
+export const isUpdateLoading = ref(false)
+
 export const getShareData = () => {
     isLoading.value = true
     axios.get(VITE_API_URL + 'share_music/get')
@@ -70,6 +73,29 @@ export const registShareData = (music: Music) => {
         })
         .finally(function () {
             isregistLoading.value = false
+        })
+}
+
+export const updateShareData = (music: Music) => {
+    isUpdateLoading.value = true
+    const params = new URLSearchParams({});
+    params.append('id', music.id);
+    params.append('title', music.title);
+    params.append('hiragana', music.hiragana);
+    params.append('artist', music.artist);
+    params.append('max_key', music.max_key);
+    params.append('is_available_msy', String(music.massann));
+    params.append('is_available_gil', String(music.gil));
+    params.append('is_available_fulu', String(music.fulu));
+    axios.post(VITE_API_URL + 'share_music/update', params)
+        .then(function (res) {
+            updateResponce.value = res.data.result
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+        .finally(function () {
+            isUpdateLoading.value = false
         })
 }
 

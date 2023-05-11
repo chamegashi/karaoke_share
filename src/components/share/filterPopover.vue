@@ -27,7 +27,7 @@ watch(filterArray.value, () => {
 </script>
 
 <template>
-    <Popover v-slot="{ open }" class="relative w-full h-full">
+    <Popover v-slot="{ open }" class="relative w-full h-full z-20">
         <PopoverButton :class="open ? '' : 'text-opacity-90'"
             class="w-full h-full flex justify-center rounded border border-gray-500 ">
             <AdjustmentsHorizontalIcon class="h-full w-6 text-white" />
@@ -37,7 +37,7 @@ watch(filterArray.value, () => {
             <PopoverPanel
                 class="absolute left-1/2 z-10 mt-3 w-72 max-w-sm -translate-x-3/4 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div class="overflow-hidden rounded-lg shadow-2xl ring-1 ring-black ring-opacity-5">
-                    <div class="relative grid gap-8 p-5 lg:grid-cols-2 bg-gray-700">
+                    <div class="relative gap-8 p-5  bg-gray-700">
                         <filterPopoverAvailableList user="MSY"
                             :available-value="filterArray.songAvailableArray.msyAvailable"
                             @update="(value) => filterArray.songAvailableArray.msyAvailable = value" />

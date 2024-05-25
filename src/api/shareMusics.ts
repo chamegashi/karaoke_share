@@ -64,7 +64,7 @@ export const registShareData = (music: Music) => {
     params.append('is_available_msy', String(music.massann));
     params.append('is_available_gil', String(music.gil));
     params.append('is_available_fulu', String(music.fulu));
-    axios.post(VITE_API_URL + 'share_music/regist', params)
+    axios.post(VITE_API_URL + 'share_music/register', params)
         .then(function (res) {
             registResponce.value = res.data.result
         })

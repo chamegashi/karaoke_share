@@ -42,7 +42,7 @@ export const updateShareIsAvailable = (id: string, msy: SongAvailable, gil: Song
     params.append('is_available_msy', String(msy));
     params.append('is_available_gil', String(gil));
     params.append('is_available_fulu', String(fulu));
-    axios.put(VITE_API_URL + 'share_music/update_is_avialable', params)
+    axios.post(VITE_API_URL + 'share_music/update_is_avialable', params)
         .then(function (res) {
             isAvailableResponce.value = res.data.result
         })
@@ -87,7 +87,8 @@ export const updateShareData = (music: Music) => {
     params.append('is_available_msy', String(music.massann));
     params.append('is_available_gil', String(music.gil));
     params.append('is_available_fulu', String(music.fulu));
-    axios.put(VITE_API_URL + 'share_music/update', params)
+    // TODO: いつか put にする
+    axios.post(VITE_API_URL + 'share_music/update', params)
         .then(function (res) {
             updateResponce.value = res.data.result
         })
@@ -104,7 +105,7 @@ export const deleteShareData = (music: Music) => {
     const params = new URLSearchParams({});
     params.append('id', music.id);
     // TODO: いつか delete にする
-    axios.put(VITE_API_URL + 'share_music/delete', params)
+    axios.post(VITE_API_URL + 'share_music/delete', params)
         .then(function (res) {
             deleteResponce.value = res.data.result
         })

@@ -134,7 +134,7 @@ watch(updateResponce, () => {
 <template>
     <div class="relative bg-gray-700 overflow-x-hidden main-view">
         <div class="pt-2 mb-3 mx-3">
-            <button class="border rounded py-2 px-4" @click="$router.push('/')">
+            <button class="border rounded py-2 px-4 border-white" @click="$router.push('/')">
                 <ArrowUturnLeftIcon class="h-6 w-6 text-white" />
             </button>
         </div>
@@ -144,7 +144,7 @@ watch(updateResponce, () => {
                     <span v-if="titleValidation" class="text-red-400"> 必須項目！</span>
                 </p>
             </div>
-            <input class="w-full p-1 rounded" :class="{ ' border border-red-500 bg-red-200': titleValidation }"
+            <input class="w-full p-1 rounded bg-white" :class="{ ' border border-red-500 bg-red-200': titleValidation }"
                 v-model="titleValue">
         </div>
         <div class="w-5/6 mx-auto mt-2">
@@ -153,7 +153,7 @@ watch(updateResponce, () => {
                     <span v-if="hiraganaValidation" class="text-red-400"> 必須項目でひらがなのみ！</span>
                 </p>
             </div>
-            <input class="w-full p-1 rounded" :class="{ ' border border-red-500 bg-red-200': hiraganaValidation }"
+            <input class="w-full p-1 rounded bg-white" :class="{ ' border border-red-500 bg-red-200': hiraganaValidation }"
                 v-model="hiraganaValue">
         </div>
         <div class="w-5/6 mx-auto mt-2">
@@ -162,7 +162,7 @@ watch(updateResponce, () => {
                     <span v-if="artistValidation" class="text-red-400"> 必須項目！</span>
                 </p>
             </div>
-            <input class="w-full p-1 rounded" :class="{ ' border border-red-500 bg-red-200': artistValidation }"
+            <input class="w-full p-1 rounded bg-white" :class="{ ' border border-red-500 bg-red-200': artistValidation }"
                 v-model="artistValue">
         </div>
 

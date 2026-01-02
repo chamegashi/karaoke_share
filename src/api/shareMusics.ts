@@ -2,8 +2,8 @@ import axios from 'axios';
 import { Music, ShareMusicResponce, SongAvailable } from '../common/type';
 import { ref } from 'vue';
 
-// const VITE_API_URL = 'http://localhost:5000/api/'
-const VITE_API_URL = 'https://pykaraokebackend.onrender.com/api/'
+// const VITE_API_URL = 'http://localhost:3000/share_music'
+const VITE_API_URL = 'https://tsserver-zoki.onrender.com/share_music'
 
 export const responce = ref<ShareMusicResponce[] | null>()
 export const isLoading = ref(false)
@@ -23,9 +23,9 @@ export const isUpdateLoading = ref(false)
 
 export const getShareData = () => {
     isLoading.value = true
-    axios.get(VITE_API_URL + 'share_music/get')
+    axios.get(VITE_API_URL)
         .then(function (res) {
-            responce.value = res.data.result
+            responce.value = res.data
         })
         .catch(function (error) {
             console.log(error)
@@ -42,9 +42,9 @@ export const updateShareIsAvailable = (id: string, msy: SongAvailable, gil: Song
     params.append('is_available_msy', String(msy));
     params.append('is_available_gil', String(gil));
     params.append('is_available_fulu', String(fulu));
-    axios.post(VITE_API_URL + 'share_music/update_is_avialable', params)
+    axios.put(VITE_API_URL + '/is_available', params)
         .then(function (res) {
-            isAvailableResponce.value = res.data.result
+            isAvailableResponce.value = res.data
         })
         .catch(function (error) {
             console.log(error)
@@ -64,9 +64,9 @@ export const registShareData = (music: Music) => {
     params.append('is_available_msy', String(music.massann));
     params.append('is_available_gil', String(music.gil));
     params.append('is_available_fulu', String(music.fulu));
-    axios.post(VITE_API_URL + 'share_music/register', params)
+    axios.post(VITE_API_URL, params)
         .then(function (res) {
-            registResponce.value = res.data.result
+            registResponce.value = res.data
         })
         .catch(function (error) {
             console.log(error)
@@ -87,10 +87,9 @@ export const updateShareData = (music: Music) => {
     params.append('is_available_msy', String(music.massann));
     params.append('is_available_gil', String(music.gil));
     params.append('is_available_fulu', String(music.fulu));
-    // TODO: いつか put にする
-    axios.post(VITE_API_URL + 'share_music/update', params)
+    axios.put(VITE_API_URL, params)
         .then(function (res) {
-            updateResponce.value = res.data.result
+            updateResponce.value = res.data
         })
         .catch(function (error) {
             console.log(error)
@@ -102,12 +101,9 @@ export const updateShareData = (music: Music) => {
 
 export const deleteShareData = (music: Music) => {
     isDeleteLoading.value = true
-    const params = new URLSearchParams({});
-    params.append('id', music.id);
-    // TODO: いつか delete にする
-    axios.post(VITE_API_URL + 'share_music/delete', params)
+    axios.delete(VITE_API_URL + '?id=' + music.id)
         .then(function (res) {
-            deleteResponce.value = res.data.result
+            deleteResponce.value = res.data
         })
         .catch(function (error) {
             console.log(error)
@@ -115,8 +111,4 @@ export const deleteShareData = (music: Music) => {
         .finally(function () {
             isDeleteLoading.value = false
         })
-}
-
-export const updateAvailable = () => {
-
 }
